@@ -1,0 +1,44 @@
+{
+  "app": {
+    "name": "BriefAI",
+    "tagline": "अपना प्रोडक्ट बताओ। BriefAI बाकी सब करता है।"
+  },
+  "nav": {
+    "home": "होम",
+    "newCampaign": "नया कैंपेन",
+    "history": "इतिहास",
+    "settings": "सेटिंग्स"
+  },
+  "actions": {
+    "continue": "आगे बढ़ें",
+    "back": "वापस",
+    "skip": "छोड़ें",
+    "cancel": "रद्द करें",
+    "confirm": "ठीक है",
+    "tryAgain": "फिर कोशिश करें",
+    "viewAll": "सभी देखें",
+    "done": "हो गया",
+    "close": "बंद करें",
+    "copy": "कॉपी करें",
+    "copied": "कॉपी हो गया ✓",
+    "download": "डाउनलोड करें",
+    "share": "शेयर करें",
+    "next": "अगला",
+    "start": "शुरू करें"
+  },
+  "status": {
+    "loading": "लोड हो रहा है...",
+    "saving": "सेव हो रहा है...",
+    "saved": "सेव हो गया",
+    "error": "कुछ गड़बड़ हो गई",
+    "offline": "इंटरनेट कनेक्शन नहीं है। कृपया जांचें।"
+  },
+  "language": {
+    "english": "English",
+    "hindi": "हिन्दी",
+    "kannada": "ಕನ್ನಡ",
+    "tamil": "தமிழ்",
+    "telugu": "తెలుగు",
+    "marathi": "मराठी"
+  }
+}

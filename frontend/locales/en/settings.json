@@ -1,0 +1,33 @@
+{
+  "title": "Settings",
+  "sections": {
+    "language": "App Language",
+    "account": "Account",
+    "instagram": "Instagram",
+    "support": "Support",
+    "about": "About"
+  },
+  "language": {
+    "label": "Choose language",
+    "current": "Current: {{lang}}"
+  },
+  "account": {
+    "anonymousTitle": "Save your campaigns across devices",
+    "anonymousBody": "Continue with phone or email to keep your campaigns when you switch devices.",
+    "comingSoon": "Coming soon"
+  },
+  "instagram": {
+    "connected": "Connected as @{{username}}",
+    "notConnected": "Not connected",
+    "connect": "Connect Instagram",
+    "disconnect": "Disconnect"
+  },
+  "help": "Help & Support",
+  "privacy": "Privacy",
+  "privacyBody": "BriefAI stores your campaign answers and generated content to show you your campaign history. Your data is not shared with third parties.",
+  "version": "Version {{version}}",
+  "startFresh": "Start Fresh",
+  "startFreshConfirmTitle": "Start fresh on this device?",
+  "startFreshConfirmBody": "This will clear your draft, language preference, and demo progress on this device. Your saved campaigns are not deleted.",
+  "startFreshConfirm": "Yes, start fresh"
+}

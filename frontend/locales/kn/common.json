@@ -1,0 +1,7 @@
+{
+  "app": { "name": "BriefAI", "tagline": "ನಿಮ್ಮ ಉತ್ಪನ್ನ ಹೇಳಿ. BriefAI ಉಳಿದದ್ದೆಲ್ಲ ಮಾಡುತ್ತದೆ." },
+  "nav": { "home": "ಮುಖಪುಟ", "newCampaign": "ಹೊಸ ಕ್ಯಾಂಪೇನ್", "history": "ಇತಿಹಾಸ", "settings": "ಸೆಟ್ಟಿಂಗ್ಸ್" },
+  "actions": { "continue": "ಮುಂದುವರಿಯಿರಿ", "back": "ಹಿಂದೆ", "skip": "ಬಿಡಿ", "cancel": "ರದ್ದು", "confirm": "ಸರಿ", "tryAgain": "ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ", "viewAll": "ಎಲ್ಲ ನೋಡಿ", "done": "ಮುಗಿಯಿತು", "close": "ಮುಚ್ಚಿ", "copy": "ಕಾಪಿ ಮಾಡಿ", "copied": "ಕಾಪಿ ಆಯಿತು ✓", "download": "ಡೌನ್ಲೋಡ್", "share": "ಹಂಚಿ", "next": "ಮುಂದೆ", "start": "ಶುರು ಮಾಡಿ" },
+  "status": { "loading": "ಲೋಡ್ ಆಗುತ್ತಿದೆ...", "saving": "ಉಳಿಸಲಾಗುತ್ತಿದೆ...", "saved": "ಉಳಿಸಲಾಗಿದೆ", "error": "ಏನೋ ತಪ್ಪಾಯಿತು", "offline": "ಇಂಟರ್ನೆಟ್ ಸಂಪರ್ಕವಿಲ್ಲ. ಪರಿಶೀಲಿಸಿ." },
+  "language": { "english": "English", "hindi": "हिन्दी", "kannada": "ಕನ್ನಡ", "tamil": "தமிழ்", "telugu": "తెలుగు", "marathi": "मराठी" }
+}

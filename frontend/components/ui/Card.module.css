@@ -1,0 +1,16 @@
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+
+.clickable {
+  cursor: pointer;
+  transition: box-shadow var(--duration-fast) var(--ease-standard),
+              transform var(--duration-fast) var(--ease-standard);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.clickable:hover { box-shadow: var(--shadow-sm); }
+.clickable:active { transform: scale(0.99); }

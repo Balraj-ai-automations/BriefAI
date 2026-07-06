@@ -1,0 +1,15 @@
+{
+  "title": "ಸೆಟ್ಟಿಂಗ್ಸ್",
+  "sections": { "language": "ಅಪ್ಲಿಕೇಶನ್ ಭಾಷೆ", "account": "ಖಾತೆ", "instagram": "Instagram", "support": "ಸಹಾಯ", "about": "ಬಗ್ಗೆ" },
+  "language": { "label": "ಭಾಷೆ ಆರಿಸಿ", "current": "ಈಗ: {{lang}}" },
+  "account": { "anonymousTitle": "ನಿಮ್ಮ ಕ್ಯಾಂಪೇನ್ಗಳನ್ನು ಎಲ್ಲ ಸಾಧನಗಳಲ್ಲಿ ಉಳಿಸಿ", "anonymousBody": "ಫೋನ್ ಅಥವಾ ಇಮೇಲ್ನಿಂದ ಮುಂದುವರಿಯಿರಿ.", "comingSoon": "ಶೀಘ್ರದಲ್ಲಿ ಬರಲಿದೆ" },
+  "instagram": { "connected": "@{{username}} ಸಂಪರ್ಕಿಸಲಾಗಿದೆ", "notConnected": "ಸಂಪರ್ಕಿಸಲಾಗಿಲ್ಲ", "connect": "Instagram ಸಂಪರ್ಕಿಸಿ", "disconnect": "ಸಂಪರ್ಕ ತೆಗೆಯಿರಿ" },
+  "help": "ಸಹಾಯ ಮತ್ತು ಬೆಂಬಲ",
+  "privacy": "ಗೋಪ್ಯತೆ",
+  "privacyBody": "BriefAI ನಿಮ್ಮ ಕ್ಯಾಂಪೇನ್ ಇತಿಹಾಸ ತೋರಿಸಲು ಮಾಹಿತಿ ಇಡುತ್ತದೆ. ನಿಮ್ಮ ಡೇಟಾ ಯಾರೊಂದಿಗೂ ಹಂಚಿಕೊಳ್ಳಲ್ಪಡುವುದಿಲ್ಲ.",
+  "version": "ಆವೃತ್ತಿ {{version}}",
+  "startFresh": "ಹೊಸದಾಗಿ ಶುರು ಮಾಡಿ",
+  "startFreshConfirmTitle": "ಈ ಸಾಧನದಲ್ಲಿ ಹೊಸದಾಗಿ ಶುರು ಮಾಡಬೇಕೇ?",
+  "startFreshConfirmBody": "ಡ್ರಾಫ್ಟ್, ಭಾಷೆ ಮತ್ತು ಡೆಮೋ ಪ್ರಗತಿ ಅಳಿಸಲ್ಪಡುತ್ತದೆ. ಉಳಿಸಿದ ಕ್ಯಾಂಪೇನ್ಗಳು ಅಳಿಸಲ್ಪಡುವುದಿಲ್ಲ.",
+  "startFreshConfirm": "ಹೌದು, ಹೊಸದಾಗಿ"
+}

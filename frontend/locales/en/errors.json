@@ -1,0 +1,18 @@
+{
+  "network": "Check your internet connection and try again.",
+  "timeout": "This is taking longer than usual. Please try again.",
+  "server": "Something went wrong on our end. Please try again.",
+  "unknown": "Something went wrong. Please try again.",
+  "validation": {
+    "required": "This field is required.",
+    "tooShort": "Please enter at least {{min}} characters.",
+    "tooLong": "Please keep this under {{max}} characters."
+  },
+  "auth": {
+    "failed": "Something went wrong getting you started.",
+    "sessionLost": "Your session has expired. Please restart the app."
+  },
+  "clipboard": {
+    "failed": "Couldn't copy automatically. Press and hold the text to copy it."
+  }
+}

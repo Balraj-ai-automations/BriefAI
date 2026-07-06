@@ -1,0 +1,42 @@
+{
+  "language": {
+    "heading": "Choose your language",
+    "subheading": "Select the language you're most comfortable with",
+    "continue": "Continue"
+  },
+  "demo": {
+    "step1": {
+      "title": "Tell us about your product",
+      "body": "Describe what you sell, the price, your offer, and who buys it — in your own words."
+    },
+    "step2": {
+      "title": "BriefAI creates your content",
+      "body": "We generate an Instagram caption, WhatsApp message, and a campaign image — all ready to use."
+    },
+    "step3": {
+      "title": "Copy it or post directly",
+      "body": "Copy your message, download your image, or post straight to Instagram."
+    },
+    "skip": "Skip",
+    "next": "Next",
+    "start": "Let's Start"
+  },
+  "business": {
+    "heading": "What is your business called?",
+    "helper": "This helps BriefAI personalize your content.",
+    "placeholder": "e.g. Sharma Jewellers, Sri Dosa House",
+    "continue": "Continue",
+    "validation": {
+      "required": "Please tell us your business name.",
+      "tooShort": "Business name must be at least 2 characters.",
+      "tooLong": "Business name must be under 50 characters."
+    }
+  },
+  "loading": {
+    "gettingStarted": "Getting you started..."
+  },
+  "error": {
+    "authFailed": "Something went wrong getting you started.",
+    "tryAgain": "Try Again"
+  }
+}

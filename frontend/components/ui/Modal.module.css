@@ -1,0 +1,44 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(36, 26, 22, 0.45);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-5);
+  animation: fadeIn var(--duration-enter) var(--ease-standard);
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modal {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  width: 100%;
+  max-width: 420px;
+  box-shadow: var(--shadow-md);
+  animation: slideUp var(--duration-enter) var(--ease-standard);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(16px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-4); }
+.title { font-size: 18px; font-weight: 600; color: var(--color-text-primary); }
+
+.closeBtn {
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  border: none; background: none; border-radius: var(--radius-sm);
+  cursor: pointer; color: var(--color-text-muted);
+}
+.closeBtn:hover { background: var(--color-surface-soft); }
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop { animation: none; }
+  .modal { animation: none; }
+}

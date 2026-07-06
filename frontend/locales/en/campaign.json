@@ -1,0 +1,162 @@
+{
+  "new": {
+    "progress": "Question {{current}} of {{total}}",
+    "draftRestored": "Your campaign draft was restored.",
+    "continueDraft": "Continue your campaign",
+    "continueDraftSub": "You were on Question {{current}} of {{total}}",
+    "startNew": "Start a new campaign",
+    "startNewConfirmTitle": "Start a new campaign?",
+    "startNewConfirmBody": "Your current answers will be cleared. This cannot be undone.",
+    "startNewConfirm": "Yes, start new",
+    "hasDraftTitle": "You have an unfinished campaign",
+    "hasDraftBody": "Would you like to continue it or start a new one?",
+    "continueDraftAction": "Continue it",
+    "startFreshAction": "Start new campaign"
+  },
+  "questions": {
+    "name": {
+      "title": "What should we call you?",
+      "helper": "Enter your first name or business name.",
+      "placeholder": "e.g. Ravi, Priya, Sharma Jewellers"
+    },
+    "product": {
+      "title": "What product or service do you sell?",
+      "helper": "Describe what you offer in a few words.",
+      "placeholder": "e.g. Homemade pickles, Tailoring services, Mobile repair"
+    },
+    "usp": {
+      "title": "What makes it special?",
+      "helper": "What do customers love about it? What's different?",
+      "placeholder": "e.g. Made fresh every day, 10 years of experience, same-day delivery"
+    },
+    "price": {
+      "title": "What is the price?",
+      "helper": "Write it naturally — ₹500, from ₹299, depends on service, etc.",
+      "placeholder": "e.g. ₹299, Starts from ₹500"
+    },
+    "offer": {
+      "title": "Is there an offer right now?",
+      "helper": "Any discount, deal, or free gift? Leave blank if there's no offer.",
+      "placeholder": "e.g. 20% off this week, Buy 2 get 1 free",
+      "skip": "No offer right now"
+    },
+    "buyer": {
+      "title": "Who usually buys it?",
+      "helper": "Describe your typical customer.",
+      "placeholder": "e.g. Working women, College students, Local families"
+    },
+    "location": {
+      "title": "Where do you sell?",
+      "helper": "Your city, area, or online — wherever you reach customers.",
+      "placeholder": "e.g. Bengaluru, Koramangala, Pan-India online"
+    },
+    "occasion": {
+      "title": "Is there an occasion?",
+      "helper": "Is this for a festival, season, or just regular business?",
+      "options": {
+        "none": "Regular business",
+        "diwali": "Diwali",
+        "eid": "Eid",
+        "christmas": "Christmas",
+        "pongal": "Pongal / Sankranti",
+        "holi": "Holi",
+        "new_year": "New Year",
+        "summer": "Summer season",
+        "monsoon": "Monsoon season",
+        "wedding": "Wedding season",
+        "other": "Other occasion"
+      }
+    },
+    "goal": {
+      "title": "What do you want this campaign to help with?",
+      "helper": "Pick what matters most right now.",
+      "options": {
+        "attract_customers": "Attract new customers",
+        "promote_offer": "Promote an offer or deal",
+        "build_trust": "Build trust in my business",
+        "announce_launch": "Announce a new product or service",
+        "increase_orders": "Get more orders",
+        "grow_followers": "Grow my Instagram followers"
+      }
+    },
+    "photo": {
+      "title": "Do you have a product photo?",
+      "helper": "A photo can make your campaign more personal.",
+      "take": "Take a photo",
+      "gallery": "Choose from gallery",
+      "skip": "Skip for now",
+      "replace": "Replace photo",
+      "remove": "Remove photo",
+      "unavailable": "Photo upload is coming soon.",
+      "unavailableHelper": "We'll add your photo to campaigns in an upcoming update."
+    }
+  },
+  "outputLanguage": {
+    "heading": "Almost ready!",
+    "subheading": "Choose the language for your marketing content.",
+    "whatsapp": "WhatsApp message language",
+    "instagram": "Instagram caption language"
+  },
+  "review": {
+    "heading": "Review your campaign",
+    "product": "Product / Service",
+    "price": "Price",
+    "goal": "Campaign goal",
+    "whatsappLang": "WhatsApp language",
+    "instagramLang": "Instagram language",
+    "editAnswers": "Edit answers",
+    "createCampaign": "Create Campaign",
+    "creating": "Creating..."
+  },
+  "generating": {
+    "stages": {
+      "understanding": "Understanding your business",
+      "planning": "Planning your marketing",
+      "creating": "Creating your content and image",
+      "preparing": "Preparing your campaign"
+    },
+    "takesAMinute": "This usually takes less than a minute.",
+    "stillWorking": "Still working on your campaign..."
+  },
+  "result": {
+    "heading": "Campaign ready",
+    "subheading": "Your marketing content is ready to use.",
+    "instagram": {
+      "label": "Instagram Caption",
+      "copy": "Copy Caption",
+      "showMore": "Show more",
+      "showLess": "Show less",
+      "connectToPost": "Connect Instagram to post directly",
+      "postNow": "Post to Instagram",
+      "posted": "Posted to Instagram ✓",
+      "connectNote": "You can still copy and post manually."
+    },
+    "whatsapp": {
+      "label": "WhatsApp Message",
+      "copy": "Copy Message"
+    },
+    "image": {
+      "label": "Campaign Image",
+      "download": "Download Image",
+      "loading": "Loading image...",
+      "failed": "Image could not be loaded."
+    },
+    "actions": {
+      "createAnother": "Create Another Campaign",
+      "viewHistory": "View Campaign History"
+    },
+    "partialSuccess": {
+      "imageFailed": "Image could not be generated, but your text content is ready.",
+      "captionMissing": "Instagram caption was not generated."
+    },
+    "notSaved": "This campaign was generated but couldn't be saved. Your draft is preserved.",
+    "copyFailed": "Couldn't copy automatically. Press and hold the text to copy it."
+  },
+  "error": {
+    "generationFailed": "We couldn't create your campaign.",
+    "answersAreSafe": "Your answers are safe.",
+    "timeout": "This is taking longer than expected.",
+    "tryAgain": "Try Again",
+    "reviewAnswers": "Review Answers"
+  }
+}

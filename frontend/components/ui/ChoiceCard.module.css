@@ -1,0 +1,64 @@
+.card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  cursor: pointer;
+  min-height: 52px;
+  transition: border-color var(--duration-fast) var(--ease-standard),
+              background-color var(--duration-fast) var(--ease-standard);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  text-align: left;
+  width: 100%;
+  font-family: var(--font-family);
+}
+
+.card:hover { border-color: var(--color-primary); }
+
+.selected {
+  border: 2px solid var(--color-primary);
+  background: var(--color-primary-soft);
+}
+
+.label {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  line-height: 1.4;
+}
+
+.selected .label { font-weight: 600; color: var(--color-primary); }
+
+.check {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border-strong);
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.selected .check {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.checkDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+  opacity: 0;
+  transition: opacity var(--duration-fast);
+}
+
+.selected .checkDot { opacity: 1; }

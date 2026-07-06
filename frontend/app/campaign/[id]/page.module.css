@@ -1,0 +1,13 @@
+.page { min-height: 100dvh; background: var(--color-background); display: flex; flex-direction: column; }
+.notSavedBanner { padding: var(--space-3) var(--space-5); background: var(--color-warning-soft); color: var(--color-warning); font-size: 13px; text-align: center; }
+.body { flex: 1; max-width: 720px; margin: 0 auto; width: 100%; padding: var(--space-5) var(--space-5) calc(var(--space-8) + var(--safe-bottom)); display: flex; flex-direction: column; gap: var(--space-5); }
+.section { display: flex; flex-direction: column; gap: var(--space-3); }
+.sectionLabel { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin: 0; }
+.imageWrap { width: 100%; aspect-ratio: 16/9; border-radius: var(--radius-lg); overflow: hidden; background: var(--color-surface-soft); }
+.image { width: 100%; height: 100%; object-fit: cover; }
+.imageFallback { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--color-border-strong); }
+.downloadLink { display: flex; }
+.outputCard { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-3); }
+.outputText { font-size: 15px; color: var(--color-text-primary); line-height: 1.6; margin: 0; white-space: pre-wrap; word-break: break-word; }
+.showMoreBtn { background: none; border: none; color: var(--color-primary); font-size: 14px; font-weight: 500; cursor: pointer; padding: 0; font-family: var(--font-family); }
+.actions { display: flex; flex-direction: column; gap: var(--space-3); padding-top: var(--space-3); }

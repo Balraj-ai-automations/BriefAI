@@ -1,0 +1,24 @@
+.wrapper { display: flex; flex-direction: column; gap: var(--space-1); }
+.label { font-size: 14px; font-weight: 500; color: var(--color-text-secondary); }
+
+.textarea {
+  width: 100%;
+  min-height: 110px;
+  padding: var(--space-3) var(--space-4);
+  font-size: 16px;
+  font-family: var(--font-family);
+  color: var(--color-text-primary);
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  outline: none;
+  resize: vertical;
+  line-height: 1.5;
+  transition: border-color var(--duration-fast) var(--ease-standard);
+  -webkit-appearance: none;
+}
+.textarea::placeholder { color: var(--color-text-muted); }
+.textarea:focus { border-color: var(--color-primary); }
+.textarea.error { border-color: var(--color-error); }
+.helper { font-size: 13px; color: var(--color-text-muted); }
+.errorText { font-size: 13px; color: var(--color-error); }

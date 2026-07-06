@@ -1,0 +1,33 @@
+{
+  "title": "सेटिंग्स",
+  "sections": {
+    "language": "ऐप भाषा",
+    "account": "खाता",
+    "instagram": "Instagram",
+    "support": "सहायता",
+    "about": "परिचय"
+  },
+  "language": {
+    "label": "भाषा चुनें",
+    "current": "वर्तमान: {{lang}}"
+  },
+  "account": {
+    "anonymousTitle": "अपने कैंपेन सभी डिवाइस पर सेव करें",
+    "anonymousBody": "फोन या ईमेल से जारी रखें और अपने कैंपेन सुरक्षित करें।",
+    "comingSoon": "जल्द आ रहा है"
+  },
+  "instagram": {
+    "connected": "@{{username}} से जुड़ा है",
+    "notConnected": "जुड़ा नहीं है",
+    "connect": "Instagram जोड़ें",
+    "disconnect": "हटाएं"
+  },
+  "help": "सहायता और समर्थन",
+  "privacy": "गोपनीयता",
+  "privacyBody": "BriefAI आपके कैंपेन के जवाब और कंटेंट इतिहास दिखाने के लिए रखता है। आपका डेटा किसी से शेयर नहीं होता।",
+  "version": "वर्शन {{version}}",
+  "startFresh": "नए सिरे से शुरू करें",
+  "startFreshConfirmTitle": "इस डिवाइस पर नए सिरे से शुरू करें?",
+  "startFreshConfirmBody": "ड्राफ्ट, भाषा सेटिंग और डेमो प्रगति हट जाएगी। सेव कैंपेन नहीं हटेंगे।",
+  "startFreshConfirm": "हाँ, नए सिरे से"
+}

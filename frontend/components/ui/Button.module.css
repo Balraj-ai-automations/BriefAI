@@ -1,0 +1,72 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-family);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-standard),
+              transform var(--duration-fast) var(--ease-standard),
+              box-shadow var(--duration-fast) var(--ease-standard);
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:active:not(:disabled) { transform: scale(0.97); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Sizes */
+.sm { height: 40px; padding: 0 var(--space-4); font-size: 14px; min-width: 44px; }
+.md { height: 48px; padding: 0 var(--space-5); font-size: 16px; min-width: 44px; }
+.lg { height: 52px; padding: 0 var(--space-6); font-size: 16px; min-width: 44px; }
+.fullWidth { width: 100%; }
+
+/* Variants */
+.primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+.primary:hover:not(:disabled) { background-color: var(--color-primary-hover); }
+.primary:active:not(:disabled) { background-color: var(--color-primary-pressed); }
+
+.secondary {
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+.secondary:hover:not(:disabled) { background-color: var(--color-surface-soft); }
+
+.ghost {
+  background-color: transparent;
+  color: var(--color-text-secondary);
+}
+.ghost:hover:not(:disabled) { background-color: var(--color-surface-soft); }
+
+.destructive {
+  background-color: var(--color-error-soft);
+  color: var(--color-error);
+}
+.destructive:hover:not(:disabled) { background-color: #f0cece; }
+
+/* Spinner */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation: none; border-top-color: currentColor; }
+}

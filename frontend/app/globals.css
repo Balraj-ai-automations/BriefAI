@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans+Kannada:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&family=Noto+Sans+Telugu:wght@400;500;600;700&display=swap');
+
+/* ─── DESIGN TOKENS ───────────────────────────────────────────────────────── */
+:root {
+  /* Colors */
+  --color-background:     #FAF8F4;
+  --color-surface:        #FFFDFC;
+  --color-surface-soft:   #F3EDE7;
+  --color-primary:        #7A5747;
+  --color-primary-hover:  #654638;
+  --color-primary-pressed:#51372C;
+  --color-primary-soft:   #EDE2DA;
+  --color-text-primary:   #241A16;
+  --color-text-secondary: #70645E;
+  --color-text-muted:     #918680;
+  --color-border:         #DED6D0;
+  --color-border-strong:  #B9ADA6;
+  --color-success:        #397557;
+  --color-success-soft:   #E5F1EA;
+  --color-warning:        #A56A21;
+  --color-warning-soft:   #FAEFD9;
+  --color-error:          #B34747;
+  --color-error-soft:     #F8E7E7;
+
+  /* Spacing */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* Typography */
+  --font-family: 'Noto Sans', 'Noto Sans Devanagari', 'Noto Sans Kannada', 'Noto Sans Tamil', 'Noto Sans Telugu', system-ui, sans-serif;
+
+  /* Border radius */
+  --radius-sm:  8px;
+  --radius-md:  12px;
+  --radius-lg:  16px;
+  --radius-xl:  24px;
+  --radius-full: 9999px;
+
+  /* Motion */
+  --duration-fast:   150ms;
+  --duration-normal: 200ms;
+  --duration-enter:  250ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(36,26,22,0.08), 0 1px 2px rgba(36,26,22,0.04);
+  --shadow-md: 0 4px 12px rgba(36,26,22,0.10), 0 2px 4px rgba(36,26,22,0.06);
+
+  /* Mobile safe area */
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+}
+
+/* ─── RESET ────────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+img, video { max-width: 100%; height: auto; display: block; }
+button { cursor: pointer; font-family: inherit; }
+a { color: inherit; text-decoration: none; }
+input, textarea, select { font-family: inherit; }
+
+/* ─── TYPOGRAPHY SCALE ─────────────────────────────────────────────────────── */
+.text-display    { font-size: 32px; font-weight: 700; line-height: 1.2; }
+.text-page-title { font-size: 28px; font-weight: 700; line-height: 1.25; }
+.text-question   { font-size: 24px; font-weight: 600; line-height: 1.35; }
+.text-section    { font-size: 20px; font-weight: 600; line-height: 1.35; }
+.text-card-title { font-size: 18px; font-weight: 600; line-height: 1.4; }
+.text-body-lg    { font-size: 18px; font-weight: 400; line-height: 1.5; }
+.text-body       { font-size: 16px; font-weight: 400; line-height: 1.5; }
+.text-button     { font-size: 16px; font-weight: 600; line-height: 1.25; }
+.text-label      { font-size: 14px; font-weight: 500; line-height: 1.4; }
+.text-helper     { font-size: 14px; font-weight: 400; line-height: 1.45; }
+.text-meta       { font-size: 12px; font-weight: 500; line-height: 1.4; }
+
+/* ─── LAYOUT UTILITIES ─────────────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-5);
+}
+
+@media (max-width: 374px) {
+  .container { padding: 0 var(--space-4); }
+}
+
+@media (min-width: 1024px) {
+  .container { padding: 0 var(--space-8); }
+}
+
+.page-container {
+  min-height: 100dvh;
+  background: var(--color-background);
+  padding-bottom: calc(72px + var(--safe-bottom));
+}
+
+.page-container--focused {
+  padding-bottom: 0;
+}
+
+/* ─── FOCUS RING ───────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── REDUCED MOTION ───────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── SCROLLBAR ────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border-strong); border-radius: 3px; }

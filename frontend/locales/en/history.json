@@ -1,0 +1,18 @@
+{
+  "title": "Your Campaigns",
+  "searchPlaceholder": "Search campaigns...",
+  "noResults": "No matching campaigns",
+  "noResultsSub": "Try a different product name or search word.",
+  "clearSearch": "Clear Search",
+  "empty": {
+    "title": "No campaigns yet",
+    "body": "Your first campaign will create an Instagram caption, WhatsApp message, and a campaign image.",
+    "action": "Create First Campaign"
+  },
+  "loadMore": "Load More",
+  "loadError": "We couldn't load your campaigns.",
+  "loadErrorSub": "Your campaigns are still safe.",
+  "posted": "Posted",
+  "notPosted": "Not posted",
+  "created": "Created {{date}}"
+}
