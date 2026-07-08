@@ -17,7 +17,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",
         "http://localhost:3001",
-        "https://briefai.vercel.app",  # Update with your actual Vercel domain
+        "https://brief-ai-three.vercel.app",  
     ],
     allow_credentials=True,
     allow_methods=["*"],
