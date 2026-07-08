@@ -28,8 +28,6 @@
 }
 .backBtn:hover { background: var(--color-surface-soft); }
 
-.progressWrap { flex: 1; }
-
 .draftNotice {
   margin: 0 var(--space-5) var(--space-2);
   padding: var(--space-3) var(--space-4);
@@ -59,17 +57,6 @@
 
 .qHelper { font-size: 15px; color: var(--color-text-secondary); margin: 0; line-height: 1.5; }
 
-.choiceGrid { display: flex; flex-direction: column; gap: var(--space-3); }
-
-.photoPlaceholder {
-  padding: var(--space-8) var(--space-5);
-  background: var(--color-surface-soft);
-  border-radius: var(--radius-lg);
-  text-align: center;
-}
-.photoMsg { font-size: 16px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 var(--space-2); }
-.photoHelper { font-size: 14px; color: var(--color-text-muted); margin: 0; }
-
 .stickyFooter {
   position: sticky;
   bottom: 0;
@@ -81,26 +68,3 @@
   gap: var(--space-2);
 }
 
-.reviewCard {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-}
-
-.reviewRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--space-4);
-  padding: var(--space-4) var(--space-5);
-  border-bottom: 1px solid var(--color-border);
-}
-.reviewRow:last-child { border-bottom: none; }
-.reviewLabel { font-size: 13px; color: var(--color-text-muted); font-weight: 500; flex-shrink: 0; }
-.reviewValue { font-size: 14px; color: var(--color-text-primary); text-align: right; line-height: 1.4; }
-
-.langSection { display: flex; flex-direction: column; gap: var(--space-3); }
-.langLabel { font-size: 14px; font-weight: 600; color: var(--color-text-secondary); margin: 0; }
-
-.createError { font-size: 13px; color: var(--color-error); text-align: center; }

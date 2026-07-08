@@ -1,9 +1,16 @@
 'use client';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@/components/ui/Button';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useCampaignStore } from '@/stores/campaign-store';
+import { useAppStore } from '@/stores/app-store';
+import { getCurrentUserId, ensureAnonymousSession } from '@/features/auth/anonymousAuth';
+import { generateCampaign } from '@/lib/api/campaigns';
+import { queryKeys } from '@/lib/api/query-keys';
+import { mapDraftToGenerateRequest } from '@/lib/utils';
+import { ErrorState } from '@/components/feedback/ErrorState';
+import type { CampaignDraft, GenerateCampaignResponse } from '@/lib/api/types';
 import styles from './page.module.css';
 
 const STAGES = [
@@ -13,127 +20,90 @@ const STAGES = [
   'campaign:generating.stages.preparing',
 ];
 
-// ── Mock result generator ─────────────────────────────────────────────────────
-function buildMockResult(answers: Record<string, string>) {
-  const product = answers.product || 'your product';
-  const price = answers.price || '₹499';
-  const usp = answers.usp || 'best quality';
-  const offer = answers.offer || '';
-  const location = answers.location || 'India';
-  const offerLine = offer ? `\n🎁 Special offer: ${offer}` : '';
-
-  return {
-    campaign_id: null,
-    instagram_caption:
-      `✨ Introducing ${product}!\n\n` +
-      `${usp}\n` +
-      `📍 Available in ${location}\n` +
-      `💰 Starting at just ${price}${offerLine}\n\n` +
-      `Drop a 🙋 in the comments or DM us to order!\n\n` +
-      `#SmallBusiness #MadeInIndia #BriefAI #${product.replace(/\s+/g, '')}`,
-    whatsapp_copy:
-      `🙏 Namaste!\n\n` +
-      `We are excited to offer you *${product}*.\n\n` +
-      `✅ ${usp}\n` +
-      `📍 ${location}\n` +
-      `💰 Price: *${price}*${offerLine ? '\n' + offerLine : ''}\n\n` +
-      `To place an order or know more, reply to this message. We'll get back to you shortly! 😊`,
-    image_url: `https://picsum.photos/seed/${encodeURIComponent(product)}/800/800`,
-    tone: 'friendly',
-    campaign_angle: 'value',
-  };
-}
-
 export default function GeneratingPage() {
-  const { t } = useTranslation('campaign');
+  const { t } = useTranslation(['campaign', 'common']);
   const router = useRouter();
-  const { resetDraft, answers } = useCampaignStore();
+  const queryClient = useQueryClient();
+  const campaignState = useCampaignStore();
+  const { appLanguage } = useAppStore();
   const [stageIndex, setStageIndex] = useState(0);
   const [showLongWait, setShowLongWait] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const started = useRef(false);
 
-  useEffect(() => {
-    if (started.current) return;
-    started.current = true;
+  const mutation = useMutation({
+    mutationFn: async (): Promise<{ result: GenerateCampaignResponse; userId: string }> => {
+      // Session should already exist from the /demo or / bootstrap step,
+      // but ensure it as a safety net rather than failing outright.
+      let userId = await getCurrentUserId();
+      if (!userId) userId = await ensureAnonymousSession();
 
-    // Cycle through stages
-    const stageTimer = setInterval(() => {
-      setStageIndex(i => Math.min(i + 1, STAGES.length - 1));
-    }, 2000);
+      const draft: CampaignDraft = {
+        currentQuestion: campaignState.currentQuestion,
+        answers: campaignState.answers,
+        whatsappLanguage: campaignState.whatsappLanguage,
+        instagramLanguage: campaignState.instagramLanguage,
+        appLanguage: appLanguage ?? 'en',
+        updatedAt: campaignState.updatedAt,
+        version: campaignState.version,
+      };
+      const request = mapDraftToGenerateRequest(draft, userId);
+      const result = await generateCampaign(request);
+      return { result, userId };
+    },
+    onSuccess: ({ result, userId }) => {
+      const cacheId = result.campaign_id ?? 'latest';
+      queryClient.setQueryData(queryKeys.campaigns.single(cacheId), result);
 
-    const longWaitTimer = setTimeout(() => setShowLongWait(true), 12000);
-
-    async function run() {
-      try {
-        const raw = sessionStorage.getItem('briefai:pendingCampaign');
-        if (!raw) { router.replace('/campaign/new'); return; }
-        const payload = JSON.parse(raw);
-        sessionStorage.removeItem('briefai:pendingCampaign');
-
-        // Simulate network delay (2–4 seconds)
-        await new Promise(r => setTimeout(r, 2500 + Math.random() * 1500));
-
-        let result;
-        const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL;
-
-        if (apiBase) {
-          // Real API call
-          const req = {
-            user_id: payload.user_id,
-            name: (payload.answers.name ?? '').trim(),
-            product: (payload.answers.product ?? '').trim(),
-            usp: (payload.answers.usp ?? '').trim(),
-            price: (payload.answers.price ?? '').trim(),
-            offer: (payload.answers.offer ?? '').trim() || null,
-            buyer: (payload.answers.buyer ?? '').trim(),
-            location: (payload.answers.location ?? '').trim(),
-            occasion: (payload.answers.occasion ?? 'none').trim(),
-            goal: (payload.answers.goal ?? '').trim(),
-            app_language: payload.whatsapp_language,
-            ig_language: payload.instagram_language,
-            wa_language: payload.whatsapp_language,
-            has_product_image: false,
-            product_image_base64: null,
-          };
-          const res = await fetch(`${apiBase}/api/generate`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(req),
-            signal: AbortSignal.timeout(90000),
-          });
-          if (!res.ok) throw new Error(`API error: ${res.status}`);
-          result = await res.json();
-        } else {
-          // Frontend-only mock — works without any backend
-          result = buildMockResult(payload.answers);
-        }
-
-        resetDraft();
-        sessionStorage.setItem('briefai:tempResult', JSON.stringify(result));
-        router.replace('/campaign/temp');
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Generation failed');
-      } finally {
-        clearInterval(stageTimer);
-        clearTimeout(longWaitTimer);
+      if (result.campaign_id) {
+        // Durably saved — safe to clear the draft and refresh history.
+        useCampaignStore.getState().resetDraft();
+        queryClient.invalidateQueries({ queryKey: queryKeys.campaigns.all(userId) });
       }
+      // If campaign_id is null, the draft is deliberately preserved —
+      // generation succeeded but wasn't durably saved (spec Section 51).
+      router.replace(`/campaign/${cacheId}`);
+    },
+  });
+
+  // No "already started" ref guard here — a useRef-based run-once guard
+  // does not survive React Strict Mode's dev-only mount/unmount/remount
+  // cycle correctly and silently drops the mutation's error state update.
+  // mutation.mutate() is safe to call from this effect as-is: it only runs
+  // once per real mount in production, and TanStack Query's own mutation
+  // state is the source of truth for whether a request is in flight.
+  useEffect(() => {
+    // No draft to generate from (e.g. direct navigation/refresh) — bail out.
+    if (!campaignState.answers.product) {
+      router.replace('/campaign/new');
+      return;
     }
 
-    run();
-    return () => { clearInterval(stageTimer); clearTimeout(longWaitTimer); };
-  }, []); // eslint-disable-line
+    const stageTimer = setInterval(() => {
+      setStageIndex((i) => Math.min(i + 1, STAGES.length - 1));
+    }, 2500);
+    const longWaitTimer = setTimeout(() => setShowLongWait(true), 15000);
 
-  if (error) {
+    mutation.mutate(undefined, {
+      onSettled: () => {
+        clearInterval(stageTimer);
+        clearTimeout(longWaitTimer);
+      },
+    });
+
+    return () => { clearInterval(stageTimer); clearTimeout(longWaitTimer); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (mutation.isError) {
     return (
       <div className={styles.page}>
-        <div className={styles.errorState}>
-          <p className={styles.errorTitle}>{t('campaign:error.generationFailed')}</p>
-          <p className={styles.errorSub}>{t('campaign:error.answersAreSafe')}</p>
-          <div className={styles.errorActions}>
-            <Button onClick={() => router.push('/campaign/new')}>{t('campaign:error.reviewAnswers')}</Button>
-          </div>
-        </div>
+        <ErrorState
+          title={t('campaign:error.generationFailed')}
+          body={t('campaign:error.answersAreSafe')}
+          primaryLabel={t('campaign:error.tryAgain')}
+          onPrimary={() => mutation.mutate()}
+          secondaryLabel={t('campaign:error.reviewAnswers')}
+          onSecondary={() => router.push('/campaign/new')}
+        />
       </div>
     );
   }
@@ -141,7 +111,7 @@ export default function GeneratingPage() {
   return (
     <div className={styles.page}>
       <div className={styles.center}>
-        <div className={styles.spinner} aria-label="Generating…" />
+        <div className={styles.spinner} aria-label={t('common:status.loading')} />
         <p className={styles.stage} key={stageIndex}>{t(STAGES[stageIndex])}</p>
         <p className={styles.hint}>{t('campaign:generating.takesAMinute')}</p>
         {showLongWait && <p className={styles.longWait}>{t('campaign:generating.stillWorking')}</p>}

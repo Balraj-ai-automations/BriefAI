@@ -10,7 +10,7 @@ export async function generateCampaign(
   req: GenerateCampaignRequest
 ): Promise<GenerateCampaignResponse> {
   return apiClient.post<GenerateCampaignResponse>('/api/generate', req, {
-    timeoutMs: 90000, // 90s — generation can take ~1 min
+    timeoutMs: 120000, // 120s per spec Section 78
   });
 }
 

@@ -1,6 +1,6 @@
 'use client';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { Suspense, useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import { AppHeader } from '@/components/layout/AppHeader';
 import { Button } from '@/components/ui/Button';
@@ -9,17 +9,37 @@ import { StatusBadge } from '@/components/ui/StatusBadge';
 import { ChoiceCard } from '@/components/ui/ChoiceCard';
 import { useAppStore } from '@/stores/app-store';
 import { SUPPORTED_LANGUAGES } from '@/features/campaign/questions.config';
-import { STORAGE_KEYS, storage, clearAll } from '@/lib/storage';
+import { clearAll } from '@/lib/storage';
+import { useInstagramConnection } from '@/features/instagram/useInstagramConnection';
 import i18n from '@/lib/i18n/config';
 import type { SupportedLanguage } from '@/lib/api/types';
 import styles from './page.module.css';
+
+// Backend redirects here after a failed Instagram OAuth connection:
+// /settings?instagram_error=<message>
+function InstagramErrorListener({ onError }: { onError: () => void }) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.get('instagram_error')) {
+      onError();
+      router.replace('/settings');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
+
+  return null;
+}
 
 export default function SettingsPage() {
   const { t } = useTranslation(['settings', 'common']);
   const router = useRouter();
   const { appLanguage, setAppLanguage } = useAppStore();
+  const { connected, handle, markDisconnected } = useInstagramConnection();
   const [showStartFresh, setShowStartFresh] = useState(false);
   const [privacyOpen, setPrivacyOpen] = useState(false);
+  const [instagramError, setInstagramError] = useState(false);
 
   function handleLanguageChange(code: SupportedLanguage) {
     setAppLanguage(code);
@@ -33,6 +53,9 @@ export default function SettingsPage() {
 
   return (
     <div className={styles.page}>
+      <Suspense fallback={null}>
+        <InstagramErrorListener onError={() => setInstagramError(true)} />
+      </Suspense>
       <AppHeader showBack title={t('settings:title')} />
       <main className={styles.main}>
 
@@ -62,10 +85,26 @@ export default function SettingsPage() {
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>{t('settings:sections.instagram')}</h2>
           <div className={styles.infoCard}>
-            <p className={styles.infoTitle}>{t('settings:instagram.notConnected')}</p>
-            <Button variant="secondary" size="sm" onClick={() => router.push('/connect-instagram')}>
-              {t('settings:instagram.connect')}
-            </Button>
+            {instagramError && (
+              <p style={{ color: 'var(--color-error)', fontSize: 13, margin: 0 }}>
+                {t('settings:instagram.connectFailed')}
+              </p>
+            )}
+            {connected ? (
+              <>
+                <p className={styles.infoTitle}>{t('settings:instagram.connected', { username: handle ?? '' })}</p>
+                <Button variant="ghost" size="sm" onClick={markDisconnected}>
+                  {t('settings:instagram.disconnect')}
+                </Button>
+              </>
+            ) : (
+              <>
+                <p className={styles.infoTitle}>{t('settings:instagram.notConnected')}</p>
+                <Button variant="secondary" size="sm" onClick={() => router.push('/connect-instagram')}>
+                  {t('settings:instagram.connect')}
+                </Button>
+              </>
+            )}
           </div>
         </section>
 

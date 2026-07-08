@@ -2,57 +2,75 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
-import { Search, X, Clock } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+import { Clock } from 'lucide-react';
 import { AppHeader } from '@/components/layout/AppHeader';
 import { BottomNavigation } from '@/components/layout/BottomNavigation';
-import { Button } from '@/components/ui/Button';
-import { Skeleton } from '@/components/ui/Skeleton';
+import { LoadingState } from '@/components/feedback/LoadingState';
+import { EmptyState } from '@/components/feedback/EmptyState';
+import { ErrorState } from '@/components/feedback/ErrorState';
+import { CampaignGrid } from '@/components/history/CampaignGrid';
+import { HistorySearch } from '@/components/history/HistorySearch';
+import { useUserId } from '@/features/auth/useUserId';
+import { getCampaigns } from '@/lib/api/campaigns';
+import { queryKeys } from '@/lib/api/query-keys';
 import styles from './page.module.css';
 
 export default function HistoryPage() {
-  const { t } = useTranslation('history');
+  const { t } = useTranslation(['history', 'common']);
   const router = useRouter();
   const [search, setSearch] = useState('');
+  const { userId, isLoading: userLoading } = useUserId();
 
-  // Campaigns would come from useQuery in a real implementation.
-  // Showing empty state for now since we have no stored campaigns yet.
-  const campaigns: unknown[] = [];
-  const isLoading = false;
-  const error = null;
+  const { data, isLoading, isError, refetch } = useQuery({
+    queryKey: queryKeys.campaigns.all(userId ?? ''),
+    queryFn: () => getCampaigns(userId as string),
+    enabled: !!userId,
+  });
+
+  const campaigns = data?.campaigns ?? [];
+  const query = search.trim().toLowerCase();
+  const filtered = query
+    ? campaigns.filter((c) => c.product.toLowerCase().includes(query))
+    : campaigns;
+
+  const loading = userLoading || isLoading;
 
   return (
     <div className={styles.page}>
       <AppHeader title={t('history:title')} />
       <main className={styles.main}>
-        {isLoading ? (
-          <div className={styles.skeletons}>
-            {[1,2,3].map(i => <Skeleton key={i} height={96} borderRadius="var(--radius-lg)" />)}
-          </div>
-        ) : error ? (
-          <div className={styles.errorState}>
-            <p className={styles.errorTitle}>{t('history:loadError')}</p>
-            <p className={styles.errorSub}>{t('history:loadErrorSub')}</p>
-          </div>
+        {loading ? (
+          <LoadingState variant="skeletonList" count={3} skeletonHeight={96} />
+        ) : isError ? (
+          <ErrorState
+            title={t('history:loadError')}
+            body={t('history:loadErrorSub')}
+            primaryLabel={t('common:actions.tryAgain')}
+            onPrimary={() => refetch()}
+          />
         ) : campaigns.length === 0 ? (
-          <div className={styles.emptyState}>
-            <Clock size={48} strokeWidth={1.5} color="var(--color-border-strong)" />
-            <h2 className={styles.emptyTitle}>{t('history:empty.title')}</h2>
-            <p className={styles.emptySub}>{t('history:empty.body')}</p>
-            <Button onClick={() => router.push('/campaign/new')}>{t('history:empty.action')}</Button>
-          </div>
+          <EmptyState
+            icon={<Clock size={48} strokeWidth={1.5} />}
+            title={t('history:empty.title')}
+            body={t('history:empty.body')}
+            actionLabel={t('history:empty.action')}
+            onAction={() => router.push('/campaign/new')}
+          />
         ) : (
           <>
             {campaigns.length >= 6 && (
-              <div className={styles.searchWrap}>
-                <Search size={16} className={styles.searchIcon} />
-                <input
-                  className={styles.searchInput}
-                  placeholder={t('history:searchPlaceholder')}
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
-                {search && <button className={styles.clearBtn} onClick={() => setSearch('')}><X size={14} /></button>}
-              </div>
+              <HistorySearch value={search} onChange={setSearch} placeholder={t('history:searchPlaceholder')} />
+            )}
+            {filtered.length === 0 ? (
+              <EmptyState
+                title={t('history:noResults')}
+                body={t('history:noResultsSub')}
+                actionLabel={t('history:clearSearch')}
+                onAction={() => setSearch('')}
+              />
+            ) : (
+              <CampaignGrid campaigns={filtered} onOpen={(id) => router.push(`/campaign/${id}`)} />
             )}
           </>
         )}

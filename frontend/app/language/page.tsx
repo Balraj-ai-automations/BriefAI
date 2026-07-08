@@ -28,7 +28,7 @@ export default function LanguagePage() {
     <div className={styles.page}>
       <div className={styles.content}>
         <div className={styles.logo}>
-          <Image src="/logo.png" alt="BriefAI Logo" width={64} height={64} />
+          <Image src="/logo/logo.png" alt="BriefAI" width={72} height={72} priority />
         </div>
         <h1 className={styles.heading}>{t('onboarding:language.heading')}</h1>
         <p className={styles.sub}>{t('onboarding:language.subheading')}</p>

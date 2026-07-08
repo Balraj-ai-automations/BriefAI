@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
-import { useAppStore } from '@/stores/app-store';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { STORAGE_KEYS, storage } from '@/lib/storage';
@@ -11,7 +10,6 @@ import styles from './page.module.css';
 
 export default function BusinessPage() {
   const { t } = useTranslation('onboarding');
-  const { appLanguage } = useAppStore();
   const [name, setName] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
@@ -35,7 +33,7 @@ export default function BusinessPage() {
   return (
     <div className={styles.page}>
       <div className={styles.logo}>
-        <Image src="/logo.png" alt="BriefAI Logo" width={64} height={64} />
+        <Image src="/logo/logo.png" alt="BriefAI" width={56} height={56} priority />
       </div>
       <form className={styles.form} onSubmit={handleSubmit} noValidate>
         <h1 className={styles.heading}>{t('onboarding:business.heading')}</h1>

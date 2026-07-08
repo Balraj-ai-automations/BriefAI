@@ -1,9 +1,11 @@
+import type { StateStorage } from 'zustand/middleware';
+
 // Storage keys — single source of truth
 export const STORAGE_KEYS = {
-  LANGUAGE: 'briefai:v1:language',
-  DEMO_COMPLETED: 'briefai:v1:demo-completed',
+  APP_STATE: 'briefai:v1:app-state', // app language + demo-completed flag
   CAMPAIGN_DRAFT: 'briefai:v1:campaign-draft',
   BUSINESS_NAME_DONE: 'briefai:v1:business-onboarding-done',
+  INSTAGRAM_CONNECTION: 'briefai:v1:instagram-connection',
 } as const;
 
 export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];
@@ -55,5 +57,22 @@ export const storage = {
   set: storageSet,
   remove: storageRemove,
   clearAll: storageClearAll,
+};
+
+// SSR-safe localStorage adapter for zustand's persist middleware.
+// Returns null/no-ops on the server instead of throwing.
+export const zustandStorage: StateStorage = {
+  getItem: (name) => {
+    if (typeof window === 'undefined') return null;
+    return window.localStorage.getItem(name);
+  },
+  setItem: (name, value) => {
+    if (typeof window === 'undefined') return;
+    window.localStorage.setItem(name, value);
+  },
+  removeItem: (name) => {
+    if (typeof window === 'undefined') return;
+    window.localStorage.removeItem(name);
+  },
 };
 

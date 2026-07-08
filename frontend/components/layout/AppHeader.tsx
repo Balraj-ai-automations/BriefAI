@@ -1,7 +1,6 @@
 'use client';
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 import { ChevronLeft } from 'lucide-react';
 import styles from './AppHeader.module.css';
 
@@ -27,9 +26,7 @@ export function AppHeader({ showBack, onBack, title, right, showLogo = true }: A
       {title ? (
         <span className={styles.title}>{title}</span>
       ) : showLogo ? (
-        <span className={styles.logo}>
-          <Image src="/logo.png" alt="BriefAI" width={32} height={32} style={{ borderRadius: '6px' }} />
-        </span>
+        <span className={styles.logo}>BriefAI</span>
       ) : null}
       {right && <div className={styles.right}>{right}</div>}
     </header>

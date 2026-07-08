@@ -1,6 +1,6 @@
 .page { min-height: 100dvh; background: var(--color-background); display: flex; flex-direction: column; }
 .main { flex: 1; max-width: 800px; margin: 0 auto; width: 100%; padding: var(--space-5) var(--space-5) calc(80px + var(--safe-bottom)); display: flex; flex-direction: column; gap: var(--space-6); }
-.hero { background: linear-gradient(135deg, var(--color-primary) 0%, #5c3d2f 100%); border-radius: var(--radius-xl); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); color: white; }
+.hero { background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-pressed) 100%); border-radius: var(--radius-xl); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); color: white; }
 .greeting { font-size: 22px; font-weight: 700; margin: 0; color: white; }
 .heroSub { font-size: 15px; opacity: 0.85; margin: 0; color: white; }
 .newBtn { background: rgba(255,255,255,0.15) !important; border: 1.5px solid rgba(255,255,255,0.3); backdrop-filter: blur(8px); color: white !important; }
@@ -12,3 +12,5 @@
 .sectionTitle { font-size: 18px; font-weight: 600; color: var(--color-text-primary); margin: 0; }
 .viewAll { background: none; border: none; cursor: pointer; color: var(--color-primary); font-size: 14px; font-weight: 500; font-family: var(--font-family); }
 .emptyHistory { background: var(--color-surface); border: 1px dashed var(--color-border-strong); border-radius: var(--radius-lg); padding: var(--space-8) var(--space-5); display: flex; flex-direction: column; align-items: center; gap: var(--space-4); text-align: center; color: var(--color-text-muted); }
+.instagramBanner { display: flex; align-items: center; gap: var(--space-2); background: var(--color-success-soft); color: var(--color-success); font-size: 14px; font-weight: 500; padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); }
+.latestWrap { max-width: 320px; }

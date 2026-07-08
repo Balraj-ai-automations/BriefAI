@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import Providers from './providers';
+import { LanguageSync } from './LanguageSync';
+import { OfflineNotice } from '@/components/feedback/OfflineNotice';
 
 export const metadata: Metadata = {
   title: 'BriefAI — Apna marketing, AI se',
@@ -11,8 +13,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  // Spec Section 88: support 200% zoom, never disable pinch-to-zoom.
   themeColor: '#FAF8F4',
 };
 
@@ -24,7 +25,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <LanguageSync />
+          <OfflineNotice />
+          {children}
+        </Providers>
       </body>
     </html>
   );

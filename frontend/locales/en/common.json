@@ -40,5 +40,13 @@
     "tamil": "தமிழ்",
     "telugu": "తెలుగు",
     "marathi": "मराठी"
+  },
+  "dashboard": {
+    "greeting": "Hello, {{name}} 👋",
+    "greetingNoName": "Hello 👋",
+    "heroSub": "Create your marketing content in seconds",
+    "historyEmpty": "Your campaigns will appear here",
+    "createFirst": "Create First Campaign",
+    "instagramConnected": "Instagram connected as @{{handle}}"
   }
 }

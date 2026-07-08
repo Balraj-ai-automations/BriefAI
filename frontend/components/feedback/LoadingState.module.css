@@ -1,0 +1,2 @@
+.skeletons { display: flex; flex-direction: column; gap: var(--space-3); }
+.spinnerWrap { display: flex; align-items: center; justify-content: center; padding: var(--space-10) var(--space-5); }

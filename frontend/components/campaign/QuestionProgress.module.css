@@ -1,0 +1,21 @@
+.topBar {
+  padding: calc(var(--space-4) + var(--safe-top)) var(--space-5) var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--color-background);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.backBtn {
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  border: none; background: none; border-radius: var(--radius-sm);
+  cursor: pointer; font-size: 18px; color: var(--color-text-primary);
+  flex-shrink: 0;
+}
+.backBtn:hover { background: var(--color-surface-soft); }
+
+.progressWrap { flex: 1; }

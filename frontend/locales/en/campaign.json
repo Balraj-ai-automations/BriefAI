@@ -128,8 +128,15 @@
       "showLess": "Show less",
       "connectToPost": "Connect Instagram to post directly",
       "postNow": "Post to Instagram",
+      "posting": "Posting...",
       "posted": "Posted to Instagram ✓",
-      "connectNote": "You can still copy and post manually."
+      "connectNote": "You can still copy and post manually.",
+      "postConfirmTitle": "Post this campaign to Instagram?",
+      "postConfirmBody": "The generated image and caption will be published.",
+      "postFailed": "We couldn't post this campaign.",
+      "postFailedSub": "Your image and caption are safe.",
+      "connectionExpired": "Your Instagram connection needs to be renewed.",
+      "reconnect": "Reconnect Instagram"
     },
     "whatsapp": {
       "label": "WhatsApp Message",
@@ -157,6 +164,7 @@
     "answersAreSafe": "Your answers are safe.",
     "timeout": "This is taking longer than expected.",
     "tryAgain": "Try Again",
-    "reviewAnswers": "Review Answers"
+    "reviewAnswers": "Review Answers",
+    "notFound": "We couldn't find this campaign."
   }
 }

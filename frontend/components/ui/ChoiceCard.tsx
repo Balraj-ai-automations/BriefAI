@@ -16,7 +16,6 @@ export function ChoiceCard({ label, value, selected, onSelect, icon }: ChoiceCar
       type="button"
       className={[styles.card, selected ? styles.selected : ''].filter(Boolean).join(' ')}
       onClick={() => onSelect(value)}
-      aria-pressed={selected}
       role="radio"
       aria-checked={selected}
     >

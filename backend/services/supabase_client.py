@@ -27,3 +27,6 @@ supabase: Client = create_client(
     SUPABASE_URL,
     SUPABASE_KEY,
 )
+
+# Alias used by api/auth.py and api/instagram.py
+supabase_client = supabase

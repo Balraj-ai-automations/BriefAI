@@ -45,14 +45,4 @@
 
 .benefitText { font-size: 14px; color: var(--color-text-primary); line-height: 1.5; margin: 0; padding-top: 2px; }
 
-.comingSoonBadge {
-  display: flex; align-items: center; gap: var(--space-2);
-  justify-content: center;
-  padding: var(--space-3) var(--space-4);
-  background: var(--color-success-soft);
-  color: var(--color-success);
-  border-radius: var(--radius-md);
-  font-size: 13px; font-weight: 500;
-}
-
 .actions { display: flex; flex-direction: column; gap: var(--space-3); margin-top: auto; }

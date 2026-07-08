@@ -1,0 +1,19 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "briefai-backend",
+      "runtimeExecutable": "C:\\Users\\balra\\OneDrive\\Attachments\\Desktop\\brief.ai\\backend\\venv\\Scripts\\python.exe",
+      "runtimeArgs": ["-m", "uvicorn", "main:app", "--reload", "--port", "8000"],
+      "cwd": "C:\\Users\\balra\\OneDrive\\Attachments\\Desktop\\brief.ai\\backend",
+      "port": 8000
+    },
+    {
+      "name": "briefai-frontend",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "C:\\Users\\balra\\OneDrive\\Attachments\\Desktop\\brief.ai\\frontend",
+      "port": 3000
+    }
+  ]
+}

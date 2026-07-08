@@ -20,7 +20,16 @@
     "connected": "Connected as @{{username}}",
     "notConnected": "Not connected",
     "connect": "Connect Instagram",
-    "disconnect": "Disconnect"
+    "disconnect": "Disconnect",
+    "connectFailed": "Couldn't connect Instagram. Please try again."
+  },
+  "connectPage": {
+    "heading": "Connect Instagram to post directly",
+    "sub": "Once connected, you can post your AI-generated campaign images and captions directly from BriefAI — no copy-paste needed.",
+    "benefit1": "Post campaign images directly from BriefAI",
+    "benefit2": "Share your WhatsApp message to Instagram Stories",
+    "benefit3": "Reach more customers without leaving the app",
+    "notNow": "Not now"
   },
   "help": "Help & Support",
   "privacy": "Privacy",

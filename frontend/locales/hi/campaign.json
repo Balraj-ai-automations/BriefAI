@@ -128,8 +128,15 @@
       "showLess": "कम दिखाएं",
       "connectToPost": "Instagram से जोड़ें",
       "postNow": "Instagram पर पोस्ट करें",
+      "posting": "पोस्ट हो रहा है...",
       "posted": "Instagram पर पोस्ट हो गया ✓",
-      "connectNote": "आप अभी भी कॉपी करके मैन्युअली पोस्ट कर सकते हैं।"
+      "connectNote": "आप अभी भी कॉपी करके मैन्युअली पोस्ट कर सकते हैं।",
+      "postConfirmTitle": "क्या इस कैंपेन को Instagram पर पोस्ट करें?",
+      "postConfirmBody": "जनरेट की गई इमेज और कैप्शन पब्लिश हो जाएंगे।",
+      "postFailed": "हम यह कैंपेन पोस्ट नहीं कर सके।",
+      "postFailedSub": "आपकी इमेज और कैप्शन सुरक्षित हैं।",
+      "connectionExpired": "आपका Instagram कनेक्शन फिर से जोड़ना होगा।",
+      "reconnect": "Instagram फिर से जोड़ें"
     },
     "whatsapp": {
       "label": "WhatsApp मैसेज",
@@ -157,6 +164,7 @@
     "answersAreSafe": "आपके जवाब सुरक्षित हैं।",
     "timeout": "यह सामान्य से ज़्यादा समय ले रहा है।",
     "tryAgain": "फिर कोशिश करें",
-    "reviewAnswers": "जवाब देखें"
+    "reviewAnswers": "जवाब देखें",
+    "notFound": "यह कैंपेन नहीं मिला।"
   }
 }

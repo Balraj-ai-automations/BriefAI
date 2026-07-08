@@ -20,7 +20,16 @@
     "connected": "@{{username}} से जुड़ा है",
     "notConnected": "जुड़ा नहीं है",
     "connect": "Instagram जोड़ें",
-    "disconnect": "हटाएं"
+    "disconnect": "हटाएं",
+    "connectFailed": "Instagram जोड़ नहीं सका। कृपया फिर कोशिश करें।"
+  },
+  "connectPage": {
+    "heading": "सीधे पोस्ट करने के लिए Instagram जोड़ें",
+    "sub": "जुड़ने के बाद, आप अपनी AI-जनरेटेड कैंपेन इमेज और कैप्शन सीधे BriefAI से पोस्ट कर सकते हैं — कॉपी-पेस्ट की जरूरत नहीं।",
+    "benefit1": "BriefAI से सीधे कैंपेन इमेज पोस्ट करें",
+    "benefit2": "अपना WhatsApp मैसेज Instagram स्टोरी पर शेयर करें",
+    "benefit3": "ऐप छोड़े बिना ज्यादा ग्राहकों तक पहुंचें",
+    "notNow": "अभी नहीं"
   },
   "help": "सहायता और समर्थन",
   "privacy": "गोपनीयता",
