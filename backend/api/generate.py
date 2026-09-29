@@ -3,7 +3,7 @@ from fastapi import APIRouter, HTTPException
 from agent.graph import graph
 from models.request import GenerateRequest
 from models.response import GenerateResponse
-from services.mistral import MistralRateLimitError
+from services.ai.errors import AIProviderRateLimitError
 
 router = APIRouter(tags=["Generate"])
 
@@ -16,7 +16,6 @@ def generate_campaign(request: GenerateRequest):
     """
     Generate a complete marketing campaign.
     """
-
     try:
         initial_state = {
             "raw_input": request.model_dump(),
@@ -82,12 +81,13 @@ def generate_campaign(request: GenerateRequest):
     except HTTPException:
         raise
 
-    except MistralRateLimitError as e:
+    except AIProviderRateLimitError as e:
         raise HTTPException(
             status_code=503,
             detail={
                 "message": str(e),
-                "retryable": True,
+                "retryable": e.retryable,
+                "provider": e.provider,
             },
         )
 

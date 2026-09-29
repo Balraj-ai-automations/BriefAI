@@ -3,7 +3,7 @@ import logging
 
 from agent.state import BriefAIState
 from prompts.quality_checker import build_quality_checker_prompt
-from services.mistral import mistral_service
+from services.ai.factory import get_ai_provider
 
 logger = logging.getLogger(__name__)
 
@@ -16,7 +16,6 @@ def quality_checker_node(state: BriefAIState) -> BriefAIState:
     Instagram caption against the business profile and
     marketing strategy.
     """
-
     try:
         logger.info("Starting Quality Checker node.")
 
@@ -51,9 +50,11 @@ def quality_checker_node(state: BriefAIState) -> BriefAIState:
         )
 
         # --------------------------------------------------
-        # Step 3: Call Mistral
+        # Step 3: Call configured AI provider
         # --------------------------------------------------
-        response = mistral_service.generate(
+        ai_provider = get_ai_provider()
+
+        response = ai_provider.generate(
             prompt
         )
 

@@ -1,11 +1,11 @@
-import json
 import logging
 
 from agent.state import BriefAIState
+from agent.utils import parse_json_safely
 from prompts.image_builder import build_image_prompt
 from services.flux import generate_image
 from services.image_storage import save_image_bytes
-from services.mistral import mistral_service
+from services.ai.factory import get_ai_provider
 
 logger = logging.getLogger(__name__)
 
@@ -15,7 +15,7 @@ def image_prompt_builder_node(
 ) -> BriefAIState:
     """
     Node 4:
-    1. Ask Mistral to build an optimized FLUX prompt.
+    1. Ask the configured AI provider to build an optimized FLUX prompt.
     2. Generate the image using Hugging Face FLUX.
     3. Upload the image to Supabase Storage.
     4. Return only the updated state fields.
@@ -39,24 +39,19 @@ def image_prompt_builder_node(
         )
 
         # --------------------------------------------------
-        # Step 3: Generate prompt JSON using Mistral
+        # Step 3: Generate prompt JSON using configured AI provider
         # --------------------------------------------------
-        response = mistral_service.generate(prompt)
+        ai_provider = get_ai_provider()
 
-        print("\n========== RAW MISTRAL RESPONSE ==========")
-        print(response)
-        print("==========================================\n")
+        response = ai_provider.generate(prompt)
 
-        response = response.strip()
+        logger.debug(
+            "Image Prompt Builder AI response received."
+        )
 
-        if response.startswith("```"):
-            response = (
-                response.replace("```json", "")
-                .replace("```", "")
-                .strip()
-            )
-
-        image_config = json.loads(response)
+        # Safely extract JSON even if the model adds
+        # text before/after the JSON or uses markdown fences.
+        image_config = parse_json_safely(response)
 
         positive_prompt = image_config["positive_prompt"]
         negative_prompt = image_config["negative_prompt"]
@@ -94,6 +89,8 @@ def image_prompt_builder_node(
             "image_url": image_url,
         }
 
-    except Exception as e:
-        logger.exception("Image Prompt Builder node failed.")
+    except Exception:
+        logger.exception(
+            "Image Prompt Builder node failed."
+        )
         raise

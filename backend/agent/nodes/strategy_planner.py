@@ -3,7 +3,7 @@ import logging
 
 from agent.state import BriefAIState
 from prompts.strategy_planner import build_strategy_prompt
-from services.mistral import mistral_service
+from services.ai.factory import get_ai_provider
 
 logger = logging.getLogger(__name__)
 
@@ -24,8 +24,9 @@ def strategy_planner_node(state: BriefAIState) -> BriefAIState:
             business_profile=business_profile,
         )
 
-        # Call Mistral
-        response = mistral_service.generate(prompt)
+        # Call the configured AI provider
+        ai_provider = get_ai_provider()
+        response = ai_provider.generate(prompt)
 
         # Parse JSON response
         strategy = json.loads(response)
@@ -36,6 +37,6 @@ def strategy_planner_node(state: BriefAIState) -> BriefAIState:
             "strategy": strategy,
         }
 
-    except Exception as e:
+    except Exception:
         logger.exception("Strategy Planner node failed.")
         raise

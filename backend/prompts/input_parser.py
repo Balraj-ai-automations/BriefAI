@@ -1,44 +1,40 @@
 """
 Prompt builder for the Input Parser node.
 
-This prompt instructs the LLM to convert raw user input into a
-structured business profile that downstream LangGraph nodes can use.
+Converts raw user business information into a structured
+business profile for downstream LangGraph nodes.
 """
 
 
 def build_input_parser_prompt(raw_input: dict) -> str:
     """
     Build the prompt for the Input Parser node.
-
-    Args:
-        raw_input: Dictionary containing the user's answers from the frontend.
-
-    Returns:
-        A formatted prompt string for the Mistral model.
     """
 
     return f"""
-You are an expert at understanding Indian small businesses.
+You are a business information extraction system for Indian small businesses.
 
-The business owner may answer in Hindi, Hinglish, English, or any regional language.
+Read the user's input and extract the business information into JSON.
 
-Your job is to understand the business and convert the information into a structured JSON object.
+IMPORTANT:
+- Output ONLY the JSON object.
+- Do NOT explain your answer.
+- Do NOT use Markdown.
+- Do NOT use ``` fences.
+- Do NOT include reasoning.
+- Do NOT add text before or after the JSON.
+- Use null when information is missing.
+- Do not invent facts.
+- Keep values short and clean.
+- You may understand Hindi, Hinglish, English, Kannada, Tamil, Telugu,
+  Marathi, and other Indian languages.
+- Preserve the user's meaning.
+- Infer business_type only when it is reasonably clear.
 
-Rules:
-
-- Return ONLY valid JSON.
-- Do NOT include markdown.
-- Do NOT include explanations.
-- Do NOT include code fences.
-- If information is missing, return null.
-- Infer business type whenever possible.
-- Keep extracted values short and clean.
-
-User Input:
-
+USER INPUT:
 {raw_input}
 
-Return this exact JSON structure:
+OUTPUT EXACTLY THIS JSON STRUCTURE:
 
 {{
     "product": "",

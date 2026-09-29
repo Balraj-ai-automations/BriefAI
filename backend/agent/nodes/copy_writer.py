@@ -3,7 +3,7 @@ import logging
 from agent.state import BriefAIState
 from prompts.copy_instagram import build_instagram_prompt
 from prompts.copy_whatsapp import build_whatsapp_prompt
-from services.mistral import mistral_service
+from services.ai.factory import get_ai_provider
 
 logger = logging.getLogger(__name__)
 
@@ -19,14 +19,15 @@ def copy_writer_node(state: BriefAIState) -> BriefAIState:
         # Get data produced by previous nodes
         business_profile = state["business_profile"]
         strategy = state["strategy"]
-
         wa_language = state["wa_language"]
         ig_language = state["ig_language"]
+
+        # Get the configured AI provider once for this node
+        ai_provider = get_ai_provider()
 
         # --------------------------------------------------
         # WhatsApp Copy
         # --------------------------------------------------
-
         logger.info("Generating WhatsApp copy.")
 
         whatsapp_prompt = build_whatsapp_prompt(
@@ -35,14 +36,13 @@ def copy_writer_node(state: BriefAIState) -> BriefAIState:
             wa_language=wa_language,
         )
 
-        whatsapp_copy = mistral_service.generate(
+        whatsapp_copy = ai_provider.generate(
             prompt=whatsapp_prompt,
         ).strip()
 
         # --------------------------------------------------
         # Instagram Copy
         # --------------------------------------------------
-
         logger.info("Generating Instagram caption.")
 
         instagram_prompt = build_instagram_prompt(
@@ -51,7 +51,7 @@ def copy_writer_node(state: BriefAIState) -> BriefAIState:
             ig_language=ig_language,
         )
 
-        instagram_caption = mistral_service.generate(
+        instagram_caption = ai_provider.generate(
             prompt=instagram_prompt,
         ).strip()
 
@@ -62,6 +62,6 @@ def copy_writer_node(state: BriefAIState) -> BriefAIState:
             "instagram_caption": instagram_caption,
         }
 
-    except Exception as e:
+    except Exception:
         logger.exception("Copy Writer node failed.")
         raise
