@@ -3,6 +3,7 @@ from fastapi import APIRouter, HTTPException
 from agent.graph import graph
 from models.request import GenerateRequest
 from models.response import GenerateResponse
+from services.mistral import MistralRateLimitError
 
 router = APIRouter(tags=["Generate"])
 
@@ -20,36 +21,49 @@ def generate_campaign(request: GenerateRequest):
         initial_state = {
             "raw_input": request.model_dump(),
 
+            # Language preferences
             "app_language": request.app_language,
             "ig_language": request.ig_language,
             "wa_language": request.wa_language,
 
+            # Product image info
             "has_product_image": request.has_product_image,
             "product_image_base64": request.product_image_base64,
 
+            # Node 1 output
             "business_profile": {},
+
+            # Node 2 output
             "strategy": {},
 
+            # Node 3 output
             "whatsapp_copy": "",
             "instagram_caption": "",
 
+            # Node 4 output
             "image_prompt": "",
             "negative_prompt": "",
             "image_url": "",
-            "replicate_url": "",
+            "image_source": "",
             "aspect_ratio": "",
 
+            # Node 5 output
             "quality_passed": False,
             "quality_feedback": None,
+            "quality_score": None,
             "retry_count": 0,
 
+            # Node 6 output
             "final_response": {},
             "campaign_id": "",
+
+            # Error handling
             "error": None,
         }
 
         result = graph.invoke(initial_state)
 
+        # Handle errors returned through graph state
         if result.get("error"):
             raise HTTPException(
                 status_code=500,
@@ -67,6 +81,15 @@ def generate_campaign(request: GenerateRequest):
 
     except HTTPException:
         raise
+
+    except MistralRateLimitError as e:
+        raise HTTPException(
+            status_code=503,
+            detail={
+                "message": str(e),
+                "retryable": True,
+            },
+        )
 
     except Exception as e:
         raise HTTPException(

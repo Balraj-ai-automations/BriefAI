@@ -91,7 +91,7 @@ graph_builder.set_entry_point("input_parser")
 
 
 # --------------------------------------------------
-# Main Workflow (Parallel Fan-out / Fan-in)
+# Main Workflow (Sequential)
 # --------------------------------------------------
 
 # Input Parser -> Strategy Planner
@@ -100,23 +100,19 @@ graph_builder.add_edge(
     "strategy_planner",
 )
 
-# Strategy Planner fans out into two parallel branches
+# Strategy Planner -> Copy Writer
 graph_builder.add_edge(
     "strategy_planner",
     "copy_writer",
 )
 
+# Copy Writer -> Image Prompt Builder
 graph_builder.add_edge(
-    "strategy_planner",
+    "copy_writer",
     "image_prompt_builder",
 )
 
-# Fan-in
-graph_builder.add_edge(
-    "copy_writer",
-    "quality_checker",
-)
-
+# Image Prompt Builder -> Quality Checker
 graph_builder.add_edge(
     "image_prompt_builder",
     "quality_checker",

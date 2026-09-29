@@ -79,7 +79,9 @@ def image_prompt_builder_node(
         # --------------------------------------------------
         image_url = save_image_bytes(image_bytes)
 
-        logger.info("Image Prompt Builder node completed successfully.")
+        logger.info(
+            "Image Prompt Builder node completed successfully."
+        )
 
         # --------------------------------------------------
         # Step 6: Return only updated fields
@@ -94,7 +96,4 @@ def image_prompt_builder_node(
 
     except Exception as e:
         logger.exception("Image Prompt Builder node failed.")
-
-        return {
-            "error": str(e),
-        }
+        raise

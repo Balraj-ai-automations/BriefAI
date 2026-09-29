@@ -10,37 +10,32 @@ logger = logging.getLogger(__name__)
 
 def strategy_planner_node(state: BriefAIState) -> BriefAIState:
     """
-    Generate a marketing strategy based on the structured
-    business profile.
+    Create a marketing strategy from the structured business profile.
     """
 
     try:
         logger.info("Starting Strategy Planner node.")
 
-        # Step 1: Read business profile from state
+        # Read business profile from Input Parser
         business_profile = state["business_profile"]
 
-        # Step 2: Build prompt
+        # Build strategy prompt
         prompt = build_strategy_prompt(
             business_profile=business_profile,
         )
 
-        # Step 3: Generate response
+        # Call Mistral
         response = mistral_service.generate(prompt)
 
-        # Step 4: Parse JSON response
+        # Parse JSON response
         strategy = json.loads(response)
 
         logger.info("Strategy Planner node completed successfully.")
 
-        # Step 5: Return only updated fields
         return {
             "strategy": strategy,
         }
 
     except Exception as e:
         logger.exception("Strategy Planner node failed.")
-
-        return {
-            "error": str(e),
-        }
+        raise

@@ -17,28 +17,24 @@ def input_parser_node(state: BriefAIState) -> BriefAIState:
     try:
         logger.info("Starting Input Parser node.")
 
-        # Step 1: Read raw input
+        # Read raw user input
         raw_input = state["raw_input"]
 
-        # Step 2: Build prompt
+        # Build the Input Parser prompt
         prompt = build_input_parser_prompt(raw_input)
 
-        # Step 3: Generate response
+        # Call Mistral
         response = mistral_service.generate(prompt)
 
-        # Step 4: Parse JSON
+        # Parse Mistral JSON response
         business_profile = json.loads(response)
 
         logger.info("Input Parser node completed successfully.")
 
-        # Step 5: Return only updated fields
         return {
             "business_profile": business_profile,
         }
 
     except Exception as e:
         logger.exception("Input Parser node failed.")
-
-        return {
-            "error": str(e),
-        }
+        raise

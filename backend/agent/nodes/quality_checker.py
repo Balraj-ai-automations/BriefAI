@@ -23,20 +23,24 @@ def quality_checker_node(state: BriefAIState) -> BriefAIState:
         # --------------------------------------------------
         # Step 1: Read state
         # --------------------------------------------------
-
         business_profile = state["business_profile"]
         strategy = state["strategy"]
-
         whatsapp_copy = state["whatsapp_copy"]
         instagram_caption = state["instagram_caption"]
 
-        wa_language = state.get("wa_language", "English")
-        ig_language = state.get("ig_language", "English")
+        wa_language = state.get(
+            "wa_language",
+            "English",
+        )
+
+        ig_language = state.get(
+            "ig_language",
+            "English",
+        )
 
         # --------------------------------------------------
         # Step 2: Build prompt
         # --------------------------------------------------
-
         prompt = build_quality_checker_prompt(
             business_profile=business_profile,
             strategy=strategy,
@@ -49,21 +53,31 @@ def quality_checker_node(state: BriefAIState) -> BriefAIState:
         # --------------------------------------------------
         # Step 3: Call Mistral
         # --------------------------------------------------
-
-        response = mistral_service.generate(prompt)
+        response = mistral_service.generate(
+            prompt
+        )
 
         # --------------------------------------------------
         # Step 4: Parse JSON
         # --------------------------------------------------
+        response = response.strip()
+
+        if response.startswith("```"):
+            response = (
+                response.replace("```json", "")
+                .replace("```", "")
+                .strip()
+            )
 
         review = json.loads(response)
 
-        logger.info("Quality Checker node completed successfully.")
+        logger.info(
+            "Quality Checker node completed successfully."
+        )
 
         # --------------------------------------------------
-        # Step 5: Return only updated fields
+        # Step 5: Return updated fields
         # --------------------------------------------------
-
         return {
             "quality_passed": review["passed"],
             "quality_feedback": review["feedback"],
@@ -71,8 +85,7 @@ def quality_checker_node(state: BriefAIState) -> BriefAIState:
         }
 
     except Exception as e:
-        logger.exception("Quality Checker node failed.")
-
-        return {
-            "error": str(e),
-        }
+        logger.exception(
+            "Quality Checker node failed."
+        )
+        raise
