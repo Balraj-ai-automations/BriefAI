@@ -47,7 +47,7 @@ class HuggingFaceProvider(AIProvider):
             model=self.model,
             provider=self.provider,
             api_key=self.api_token,
-            timeout=60,
+            timeout=120,
         )
 
     def generate(

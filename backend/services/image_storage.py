@@ -48,3 +48,6 @@ def get_public_url(path: str) -> str:
         .from_(BUCKET_NAME)
         .get_public_url(path)
     )
+    logger.info("RAW SUPABASE PUBLIC URL: %r", url)
+
+    return url

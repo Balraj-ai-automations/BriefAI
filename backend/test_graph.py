@@ -2,6 +2,7 @@
 Integration test for the complete BriefAI LangGraph pipeline.
 
 Run:
+
     python test_graph.py
 """
 
@@ -13,10 +14,16 @@ from agent.graph import graph
 # --------------------------------------------------
 
 initial_state = {
+
     # -----------------------------
     # Frontend Input
     # -----------------------------
     "raw_input": {
+        # IMPORTANT:
+        # Use a real UUID that exists in your Supabase
+        # users table when testing campaign persistence.
+        "user_id": "YOUR_SUPABASE_USER_UUID",
+
         "business_name": "Sri Lakshmi Bakery",
         "business_type": "Bakery",
         "product": "Fresh Chocolate Cake",
@@ -62,14 +69,13 @@ initial_state = {
     "image_prompt": "",
     "negative_prompt": "",
     "image_url": "",
-    "replicate_url": "",
     "aspect_ratio": "1:1",
 
     # -----------------------------
     # Node 5 Output
     # -----------------------------
     "quality_passed": False,
-    "quality_score": 0,
+    "quality_score": None,
     "quality_feedback": "",
     "retry_count": 0,
 
@@ -91,57 +97,61 @@ initial_state = {
 # --------------------------------------------------
 
 print("=" * 70)
-print("🚀 Running BriefAI LangGraph Integration Test")
+print("Running BriefAI LangGraph Integration Test")
 print("=" * 70)
 
 try:
+
     result = graph.invoke(initial_state)
 
     print("\n" + "=" * 70)
-    print("✅ PIPELINE EXECUTED SUCCESSFULLY")
+    print("PIPELINE EXECUTED SUCCESSFULLY")
     print("=" * 70)
 
-    print("\n📌 Business Profile")
+    print("\nBusiness Profile")
     print(result.get("business_profile"))
 
-    print("\n📌 Marketing Strategy")
+    print("\nMarketing Strategy")
     print(result.get("strategy"))
 
-    print("\n📌 WhatsApp Copy")
+    print("\nWhatsApp Copy")
     print(result.get("whatsapp_copy"))
 
-    print("\n📌 Instagram Caption")
+    print("\nInstagram Caption")
     print(result.get("instagram_caption"))
 
-    print("\n📌 Image Prompt")
+    print("\nImage Prompt")
     print(result.get("image_prompt"))
 
-    print("\n📌 Negative Prompt")
+    print("\nNegative Prompt")
     print(result.get("negative_prompt"))
 
-    print("\n📌 Quality Passed")
+    print("\nQuality Passed")
     print(result.get("quality_passed"))
 
-    print("\n📌 Quality Score")
+    print("\nQuality Score")
     print(result.get("quality_score"))
 
-    print("\n📌 Quality Feedback")
+    print("\nQuality Feedback")
     print(result.get("quality_feedback"))
 
-    print("\n📌 Retry Count")
+    print("\nRetry Count")
     print(result.get("retry_count"))
 
-    print("\n📌 Final Response")
+    print("\nFinal Response")
     print(result.get("final_response"))
 
-    print("\n📌 Campaign ID")
+    print("\nCampaign ID")
     print(result.get("campaign_id"))
 
-    print("\n📌 Error")
+    print("\nError")
     print(result.get("error"))
 
 except Exception as e:
+
     print("\n" + "=" * 70)
-    print("❌ PIPELINE FAILED")
+    print("PIPELINE FAILED")
     print("=" * 70)
+
+    print(type(e).__name__)
     print(e)

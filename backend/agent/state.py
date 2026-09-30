@@ -34,6 +34,7 @@ class BriefAIState(TypedDict):
     # Node 5 output
     quality_passed: bool
     quality_feedback: Optional[str]
+    quality_score: Optional[float]
     retry_count: int
 
     # Node 6 output
