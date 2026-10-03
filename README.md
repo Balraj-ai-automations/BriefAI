@@ -7,6 +7,11 @@
 **Live Demo:** https://brief-ai-three.vercel.app
 
 ---
+## Demo
+
+[Watch the BriefAI MVP Demo](https://lnkd.in/p/gRvdyP6j)
+
+The demo shows the complete campaign-generation flow, from entering product information to receiving AI-generated marketing content and visuals.
 
 ## Overview
 
